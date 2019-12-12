@@ -1,0 +1,44 @@
+{
+  "name": "note-it",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "electron .",
+    "build_w32": "electron-packager ./ NoteIt --platform=win32 --arch=all --ignore=node_modules/electron-*",
+    "dist": "electron-builder --dir"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TibitFromTaiwan/Note-It.git"
+  },
+  "author": "TibitFromTaiwan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TibitFromTaiwan/Note-It/issues"
+  },
+  "homepage": "https://github.com/TibitFromTaiwan/Note-It#readme",
+  "devDependencies": {
+    "electron": "^6.1.6",
+    "electron-packager": "^14.0.6"
+  },
+  "dependencies": {
+    "auto-launch": "^5.0.5"
+  },
+  "build": {
+    "productName": "NoteIt",
+    "appId": "com.electron.NoteIt",
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    }
+  }
+}
