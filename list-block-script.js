@@ -3,20 +3,6 @@ let fs = require('fs')
 note_block = document.getElementById('note-block')
 list_count = 0
 
-write_file = () => {
-    content = ''
-    for (node of note_block.childNodes) {
-        if (node.nodeName === 'DIV' && node.id !== 'create-block-btn') {
-            content += node.textContent+'\n'
-        }
-    }
-    fs.writeFile('./list-content.txt', content, function(err) {})
-}
-create_block = (text) => {
-    insert_block = document.createElement('div')
-    insert_block.textContent = text
-    note_block.insertBefore(insert_block, note_block.lastElementChild)
-}
 window.onload = () => {
     fs.readFile('./list-content.txt', (err, data) => {
         if (err) throw err
@@ -34,11 +20,35 @@ window.onload = () => {
     })
 }
 
+update_file = () => {
+    content = ''
+    for (node of note_block.childNodes) {
+        if (node.nodeName === 'DIV' && node.id !== 'create-block-btn') {
+            content += node.textContent + '\n'
+        }
+    }
+    fs.writeFile('./list-content.txt', content, function(err) {})
+}
+
+create_block = (text) => {
+    insert_block = document.createElement('div')
+    insert_block.setAttribute('id', list_count)
+    insert_block.textContent = text
+    insert_block.innerHTML += '<div class="delete-block-btn"></div>'
+    note_block.insertBefore(insert_block, note_block.lastElementChild)
+    update_file()
+}
+
+delete_block = (n) => {
+    note_block.childNodes[n].remove()
+    update_file()
+}
+
 document.getElementById('create-block-btn').addEventListener('click', () => {
     insert_string = document.getElementById('insert-string')
     insert_string.style.display = 'block'
     insert_string.focus()
-    document.querySelector('#insert-string').addEventListener('keypress', function (e) {
+    document.querySelector('#insert-string').addEventListener('keypress', function(e) {
         var key = e.which || e.keyCode
         if (key === 13) { // 13 is enter
             if (insert_string.value === '') {
