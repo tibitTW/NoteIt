@@ -2,13 +2,19 @@ const electron = require('electron')
 
 const { app, BrowserWindow, Menu, Tray } = require('electron')
 
+const nativeImage = require('electron').nativeImage
+let icon = nativeImage.createFromPath('./resources/icon/icon@64x64.png')
+
 function createWindow() {
     // Create the browser window.
     let win = new BrowserWindow({
         title: 'Note It',
-        width: 300, minWidth: 200,
-        height: 400, minHeight: 200,
-        x: 20, y: 20,
+        width: 300,
+        minWidth: 200,
+        height: 400,
+        minHeight: 200,
+        x: 20,
+        y: 20,
         // resizable: false,
         // alwaysOnTop: true,
         transparent: true,
@@ -21,11 +27,11 @@ function createWindow() {
 
     // and load the index.html of the app.
     win.loadFile('index.html')
-    tray = new Tray('./icon@64x64.png')
+    tray = new Tray(icon)
     const contextMenu = Menu.buildFromTemplate([
-        { label: 'Lock', type: 'normal', id: 'lock-status'},
-        { type: 'separator'},
-        { label: 'close', rule: 'close', type: 'normal'}
+        { label: 'Lock', type: 'normal', id: 'lock-status' },
+        { type: 'separator' },
+        { label: 'close', rule: 'close', type: 'normal' }
     ])
     tray.setToolTip('Note It')
     tray.setContextMenu(contextMenu)

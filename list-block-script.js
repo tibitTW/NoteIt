@@ -18,6 +18,7 @@ window.onload = () => {
         }
         if (line !== '') create_block(line)
     })
+    del_block_btn_init()
 }
 
 update_file = () => {
@@ -27,16 +28,17 @@ update_file = () => {
             content += node.textContent + '\n'
         }
     }
-    fs.writeFile('./list-content.txt', content, function(err) {})
+    fs.writeFile('./list-content.txt', content, function (err) { })
 }
 
 create_block = (text) => {
     insert_block = document.createElement('div')
-    insert_block.setAttribute('id', list_count)
+    // insert_block.setAttribute('id', list_count)
     insert_block.textContent = text
-    insert_block.innerHTML += '<div class="delete-block-btn"></div>'
+    insert_block.innerHTML += '<div id="' + list_count + '" class="delete-block-btn"></div>'
     note_block.insertBefore(insert_block, note_block.lastElementChild)
     update_file()
+
 }
 
 delete_block = (n) => {
@@ -44,11 +46,18 @@ delete_block = (n) => {
     update_file()
 }
 
+del_block_btn_init = () => {
+    var del_block_btn = document.querySelectorAll('.delete-block-btn')
+    del_block_btn.forEach((btn) => {
+        console.log('whats up')
+    })
+}
+
 document.getElementById('create-block-btn').addEventListener('click', () => {
     insert_string = document.getElementById('insert-string')
     insert_string.style.display = 'block'
     insert_string.focus()
-    document.querySelector('#insert-string').addEventListener('keypress', function(e) {
+    document.querySelector('#insert-string').addEventListener('keypress', function (e) {
         var key = e.which || e.keyCode
         if (key === 13) { // 13 is enter
             if (insert_string.value === '') {
@@ -70,3 +79,9 @@ document.getElementById('insert-string').addEventListener('focusout', () => {
     insert_string.style.display = 'none'
     insert_string.value = ''
 })
+
+for (del_block_btn of document.querySelectorAll('.delete-block-btn')) {
+    del_block_btn.addEventListener('click', () => {
+        console.log('hi')
+    })
+}
