@@ -15,11 +15,11 @@ function createWindow() {
         minHeight: 200,
         x: 20,
         y: 20,
-        // resizable: false,
+        resizable: false,
         // alwaysOnTop: true,
         transparent: true,
         frame: false,
-        // skipTaskbar: true,
+        skipTaskbar: true,
         webPreferences: {
             nodeIntegration: true
         }
