@@ -1,6 +1,6 @@
 # NoteIt
 
-### 2019/12/27 Update
+### 2019/12/27 Version 1.0.0!
 
 v1.0.0 Updated.
 Finding ways to autostart when computer boot.For windows users, add a registry entry under  
