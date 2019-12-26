@@ -1,5 +1,7 @@
 # NoteIt
 
+A simple todo-list app for windows users.
+
 ### 2019/12/27 Version 1.0.0!
 
 v1.0.0 Updated.
