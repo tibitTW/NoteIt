@@ -5,9 +5,11 @@ const { app, BrowserWindow, Menu, Tray } = require('electron')
 const nativeImage = require('electron').nativeImage
 let icon = nativeImage.createFromPath('./resources/icon/icon@64x64.png')
 
+var is_on_top = false, is_lock = false
+
 function createWindow() {
     // Create the browser window.
-    let win = new BrowserWindow({
+    win = new BrowserWindow({
         title: 'Note It',
         width: 300,
         minWidth: 200,
@@ -15,11 +17,10 @@ function createWindow() {
         minHeight: 200,
         x: 20,
         y: 20,
-        resizable: false,
-        // alwaysOnTop: true,
+        // resizable: false,
         transparent: true,
         frame: false,
-        skipTaskbar: true,
+        // skipTaskbar: true,
         webPreferences: {
             nodeIntegration: true
         }
@@ -29,9 +30,29 @@ function createWindow() {
     win.loadFile('index.html')
     tray = new Tray(icon)
     const contextMenu = Menu.buildFromTemplate([
-        { label: 'Lock', type: 'normal', id: 'lock-status' },
+        { label: 'On Top', type: 'checkbox', click: function() {
+            if (is_on_top) {
+                win.setAlwaysOnTop(false)
+                is_on_top = true
+            } else {
+                win.setAlwaysOnTop(true)
+                is_on_top = false
+            }
+
+        }},
+        // { label: 'Lock', type: 'checkbox', click: function() {
+        //     if (is_lock) {
+        //         win.setIgnoreMouseEvents(false)
+        //         is_lock = false
+        //     } else {
+        //         win.setIgnoreMouseEvents(true)
+        //         is_lock = true
+        //     }
+        // }},
         { type: 'separator' },
-        { label: 'close', rule: 'close', type: 'normal' }
+        { label: 'Close', click: function () {
+            app.quit()
+        }}
     ])
     tray.setToolTip('Note It')
     tray.setContextMenu(contextMenu)
@@ -39,4 +60,6 @@ function createWindow() {
 
 let tray = null
 
-app.on('ready', createWindow)
+app.on('ready', function() {
+    createWindow()
+})

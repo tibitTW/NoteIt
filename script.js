@@ -12,7 +12,7 @@ $(document).ready(function () {
                 text += c
             }
         }
-        if (c[-1] !== '\n' && text !== '') {
+        if (data[-1] !== '\n' && text !== '') {
             create_block(text)
         }
     })
