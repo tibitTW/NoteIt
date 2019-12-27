@@ -2,18 +2,22 @@ window.$ = window.jQuery = require('jquery')
 const fs = require('fs')
 
 $(document).ready(function () {
-    $.get('list-content.txt', function (data) {
-        text = ''
-        for (c of data) {
-            if (c === '\n') {
-                create_block(text)
-                text = ''
-            } else {
-                text += c
+    fs.readFile('./list-content.txt','utf-8', function (err, data) {
+        if (err) {
+            return console.log(err)
+        } else {
+            text = ''
+            for (c of data) {
+                if (c === '\n') {
+                    create_block(text)
+                    text = ''
+                } else {
+                    text += c
+                }
             }
-        }
-        if (data[-1] !== '\n' && text !== '') {
-            create_block(text)
+            if (data[-1] !== '\n' && text !== '') {
+                create_block(text)
+            }
         }
     })
 })
