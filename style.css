@@ -42,6 +42,7 @@
     font-weight: lighter;
     line-height: 32px;
     text-align: center;
+    overflow: hidden;
 }
 
 .delete-block-btn {

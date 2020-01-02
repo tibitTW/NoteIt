@@ -1,4 +1,5 @@
 const electron = require('electron')
+const AutoLaunch = require('auto-launch')
 
 const { app, BrowserWindow, Menu, Tray } = require('electron')
 
@@ -13,7 +14,6 @@ function createWindow() {
         title: 'Note It',
         width: 300,
         minWidth: 200,
-        height: 400,
         minHeight: 200,
         x: 20,
         y: 20,
@@ -62,4 +62,11 @@ let tray = null
 
 app.on('ready', function() {
     createWindow()
+    let autoLaunch = new AutoLaunch({
+        name: 'Note it',
+        pathh: app.getPath('exe')
+    })
+    autoLaunch.isEnabled().then((isEnabled) => {
+        if (!isEnabled) autoLaunch.enable()
+    })
 })

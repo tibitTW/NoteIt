@@ -36,6 +36,7 @@ $('.create-block-btn').click(function () {
     insert_string = $('.insert-string')
     insert_string.show().focus().keypress(function (e) {
         var key = e.which || e.keyCode
+        console.log(key)
         if (key === 13) {
             if (insert_string.val() === '') {
                 insert_string.hide()
