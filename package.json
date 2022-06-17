@@ -20,7 +20,7 @@
     },
     "homepage": "https://github.com/TibitFromTaiwan/Note-It#readme",
     "devDependencies": {
-        "electron": "^6.1.6",
+        "electron": "^15.5.5",
         "electron-packager": "^14.1.1"
     },
     "dependencies": {
